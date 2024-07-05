@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Products</title>
+</head>
+<body>
+    <h1>Hello, Express!</h1>
+    <p>This is a simple webpage served by Express.js.</p>
+    <button onclick="fetchProducts()">Get The Products</button>
+    <div id="divElement">Original Content</div>
+
+    <script>
+        async function fetchProducts() {
+            let divEl = document.getElementById("divElement");
+            divEl.innerHTML = `<p>Attempting to get products...</p>`;
+            
+            try {
+                const resp = await fetch('http://localhost:3000/api/v1/query');
+                if (!resp.ok) {
+                    throw new Error(`HTTP error! Status: ${resp.status}`);
+                }
+                const products = await resp.json();
+                let count = 1;
+                divEl.innerHTML = ''; // Clear existing content
+
+                products.forEach(product => {
+                    divEl.innerHTML += `
+                        <div style="margin-bottom: 50px;">
+                            <p>Product ${count}:</p>
+                            <ul style="list-style-type: none; padding-left: 20px;">
+                                <li>Name: ${product.name}</li>
+                                <li>Description: ${product.desc}</li>
+                            </ul>
+                        </div>
+                    `;
+                    count++;
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                divEl.innerHTML = `<p>Error fetching products. Please try again later.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
