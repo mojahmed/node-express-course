@@ -1,0 +1,24 @@
+
+    Quickly explain how middleware is used in an Express application.
+
+    #In an Express application, middleware functions are used to handle requests, 
+    process data, and execute code at various stages of the request-response cycle.
+     Middleware can modify the request and response objects, end the request-response cycle, 
+     or call the next middleware function. They are defined using app.use() and executed sequentially.
+
+
+    What does CRUD stand for?
+
+    #CRUD stands for Create, Read, Update, Delete.
+
+
+    You are careful to store your sensitive information in a .env file.
+        How do you get your app to access the information in the .env file?
+
+        # by using (process.env.((the var name)))
+
+
+
+        How do you protect the contents of the .env file so that it is not stored in your Github repository?
+
+        # to put the env in the gitignore file 
